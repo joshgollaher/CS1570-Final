@@ -1,6 +1,7 @@
-
+#include "Functions.h"
 
 int main() {
-    hi josh!!!!!!!;
+    // hi josh!!!!!!!;
+
     return 0;
 }

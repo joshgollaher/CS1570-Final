@@ -4,4 +4,4 @@ project(CS1570_Final)
 set(CMAKE_CXX_STANDARD 17)
 
 add_executable(CS1570_Final
-        main.cpp)
+        main.cpp Functions.h Functions.cpp)
