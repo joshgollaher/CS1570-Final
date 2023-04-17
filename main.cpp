@@ -1,7 +1,7 @@
 #include "Functions.h"
 
 int main() {
-    // hi josh!!!!!!!;
 
+    City city;
     return 0;
 }
