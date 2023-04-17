@@ -22,3 +22,6 @@ void City::set_grid_location(int x, int y, char value) {
 
     m_grid[y][x] = value;
 }
+
+template<typename T>
+int Robber<T>::m_loot_count = 0;

@@ -36,4 +36,24 @@ public:
 
 };
 
+template <typename T>
+class Robber{
+private:
+
+    int m_robber_id;
+    pair<int, int> m_robber_coordinates;
+    char m_bag [17];
+    static int m_loot_count;
+    bool m_active;
+
+    enum RobberType {
+        Ordinary,
+        Greedy
+    };
+    RobberType m_type;
+
+public:
+
+};
+
 #endif //FUNCTIONS_H
