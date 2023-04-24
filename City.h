@@ -6,13 +6,15 @@
 #define CS1570_FINAL_CITY_H
 #include <utility>
 #include <cstdlib>
+#include <vector>
+#include "Jewel.h"
+
 using namespace std;
 
 class City {
 private:
 
     char m_grid[10][10];
-
     int m_jewel_count;
 
 public:

@@ -13,8 +13,11 @@ private:
 
     int m_worth;
     pair<int, int> m_coordinates;
+    pair<int, int> m_original_coordinates;
 
 public:
+
+    Jewel(pair<int, int> coordinates, int worth) : m_coordinates(coordinates), m_original_coordinates(coordinates), m_worth(worth) {}
 
     [[nodiscard]] int worth() const { return m_worth; }
     void set_worth(int worth) { m_worth = worth; }

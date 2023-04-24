@@ -8,6 +8,8 @@
 #include <iostream>
 #include <utility>
 #include <cstdlib>
+#include <cmath>
+
 using namespace std;
 
 template <typename T>
@@ -15,24 +17,34 @@ class Robber{
 private:
 
     int m_robber_id;
-    int m_bag_size = 0;
 
+    int m_bag_size = 0;
     T m_bag [17];
 
     pair<int, int> m_robber_coordinates;
     bool m_active;
 
     static int m_total_loot_count;
+    static int m_robber_id_count;
 
     enum class RobberType {
         Ordinary,
         Greedy
     };
     RobberType m_type;
+public:
 
-    void pick_up_loot(T loot) {
+    explicit Robber(pair<int, int> coordinates) : m_robber_coordinates(std::move(coordinates)), m_robber_id(m_robber_id_count++), m_active(true) {}
+
+    void pick_up_loot() {
+
+        int x = m_robber_coordinates.first;
+        int y = m_robber_coordinates.second;
+
+        Jewel jewel(m_robber_coordinates, x + y);
+
         if(m_bag_size < 17){
-            m_bag[m_bag_size++] = loot;
+            m_bag[m_bag_size++] = jewel;
         }
     }
 
@@ -70,7 +82,13 @@ private:
                 pick_up_loot();
                 break;
             case 'R':
-                //TODO: check if greedy
+                if(m_type == RobberType::Greedy) {
+                    int num_dropped = (int)floor(m_bag_size);
+                    for(int i = m_bag_size - 1; i >= m_bag_size-num_dropped; i--) {
+                        //TODO: place stuff
+                    }
+                    m_bag_size -= num_dropped;
+                }
                 break;
             case 'C':
                 //Cop
