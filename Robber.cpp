@@ -1,5 +1,4 @@
-//
-// Created by Joshua Gollaher on 4/24/2023.
-//
-
 #include "Robber.h"
+
+template<typename T>
+int Robber<T>::m_total_loot_count = 0;
