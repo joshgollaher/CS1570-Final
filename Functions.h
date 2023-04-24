@@ -10,6 +10,7 @@ class City {
 private:
 
     char m_grid[10][10];
+
     int m_jewel_count;
 
 public:
@@ -20,6 +21,8 @@ public:
 
     char get_grid_location(int x, int y);
     void set_grid_location(int x, int y, char value);
+
+    bool is_jewel_at(pair<int, int> coordinates) const;
 
 };
 
@@ -38,24 +41,40 @@ public:
 
 };
 
+class Police {
+private:
+
+    int m_id;
+    static int ID_COUNT;
+    pair<int, int> m_coordinates;
+    int m_robbers_caught;
+
+public:
+
+
+};
+
 template <typename T>
 class Robber{
 private:
 
     int m_robber_id;
-    pair<int, int> m_robber_coordinates;
-    char m_bag [17];
     int m_bag_size = 0;
-    static int m_loot_count;
+
+    T m_bag [17];
+
+    pair<int, int> m_robber_coordinates;
     bool m_active;
 
-    enum RobberType {
+    static int m_total_loot_count;
+
+    enum class RobberType {
         Ordinary,
         Greedy
     };
     RobberType m_type;
 
-    void pick_up_loot(char loot) {
+    void pick_up_loot(T loot) {
         if(m_bag_size < 17){
             m_bag[m_bag_size++] = loot;
         }
@@ -68,16 +87,41 @@ private:
         return x >= 0 && x <= 9 && y >= 0 && y <= 9;
     }
 
-    void move() {
+    bool near_jewel(City& city) const;
+
+    void move(City& city) {
+
+        auto add_pair = [](pair<int, int>& p1, pair<int, int>& p2) -> pair<int, int> {
+            return make_pair(p1.first + p2.first, p1.second + p2.second);
+        };
+
         int delta_x, delta_y = 0;
 
         do {
             delta_x = rand() % 3 - 1;
             delta_y = rand() % 3 - 1;
-        } while(delta_x == 0 && delta_y == 0 && is_valid_position(m_robber_coordinates + make_pair(delta_x, delta_y)));
+        } while(delta_x == 0 && delta_y == 0 && is_valid_position(add_pair(m_robber_coordinates, make_pair(delta_x, delta_y))));
 
         m_robber_coordinates.first += delta_x;
         m_robber_coordinates.second += delta_y;
+
+        switch(city.get_grid_location(m_robber_coordinates.first, m_robber_coordinates.second)) {
+            case ' ':
+                //Empty
+                break;
+            case 'J':
+                //Jewel
+                pick_up_loot();
+                break;
+            case 'R':
+                //TODO: check if greedy
+                break;
+            case 'C':
+                //Cop
+                break;
+            default:
+                cerr << "Oops!" << endl;
+        }
     }
 
 public:
