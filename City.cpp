@@ -11,6 +11,23 @@ City::City() {
             m_grid[j][i] = ' ';
         }
     }
+
+    auto place_jewel = [&]() {
+        while(true) {
+            int x = rand() % 10;
+            int y = rand() % 10;
+            if(m_grid[y][x] == ' ') {
+                m_grid[y][x] = 'J';
+                break;
+            }
+        }
+    };
+
+    for(int i = 0; i < 47; i++) {
+        place_jewel();
+    }
+
+    set_jewel_count(47);
 }
 
 char City::get_grid_location(int x, int y) {

@@ -55,8 +55,6 @@ public:
         return x >= 0 && x <= 9 && y >= 0 && y <= 9;
     }
 
-    bool near_jewel(City& city) const;
-
     void move(City& city) {
 
         auto add_pair = [](pair<int, int>& p1, pair<int, int>& p2) -> pair<int, int> {
@@ -82,16 +80,32 @@ public:
                 pick_up_loot();
                 break;
             case 'R':
-                if(m_type == RobberType::Greedy) {
+                if(m_type == RobberType::Greedy) { // FIXME: check if active
                     int num_dropped = (int)floor(m_bag_size);
                     for(int i = m_bag_size - 1; i >= m_bag_size-num_dropped; i--) {
                         //TODO: place stuff
+                        auto jewel = m_bag[i];
+                        if(city.get_grid_location(jewel.coordinates.first, jewel.coordinates.second) == ' ') {
+                            city.set_grid_location(jewel.coordinates.first, jewel.coordinates.second, 'J');
+                        } else {
+                            //Put it at a random location
+                            while(true) {
+                                int x = rand() % 10;
+                                int y = rand() % 10;
+                                if(city.get_grid_location(jewel.coordinates.first, jewel.coordinates.second) == ' ') {
+                                    city.set_grid_location(jewel.coordinates.first, jewel.coordinates.second, 'J');
+                                    break;
+                                }
+                            }
+                        }
                     }
                     m_bag_size -= num_dropped;
                 }
                 break;
             case 'C':
                 //Cop
+                m_active = false;
+
                 break;
             default:
                 cout << "Oops!" << endl;
