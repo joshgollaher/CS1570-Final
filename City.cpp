@@ -25,8 +25,8 @@ City::City() {
 
     auto place_robber = [&](){
         while(true) {
-            int x = rand() & 10;
-            int y = rand() & 10;
+            int x = rand() % 10;
+            int y = rand() % 10;
             if(m_grid[y][x] == ' ') {
                 m_grid[y][x] = 'r';
                 break;
@@ -36,8 +36,8 @@ City::City() {
 
     auto place_police = [&](){
         while(true) {
-            int x = rand() & 10;
-            int y = rand() & 10;
+            int x = rand() % 10;
+            int y = rand() % 10;
             if(m_grid[y][x] ==  ' ') {
                 m_grid[y][x] = 'p';
                 break;
@@ -49,7 +49,7 @@ City::City() {
         for(int i = 0; i < 10; i++) {
             cout << endl;
             for(int j = 0; j < 10; j++) {
-                cout << m_grid[i][j];
+                cout << m_grid[j][i];
             }
         }
     };
