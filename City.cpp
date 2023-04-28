@@ -23,10 +23,50 @@ City::City() {
         }
     };
 
+    auto place_robber = [&](){
+        while(true) {
+            int x = rand() & 10;
+            int y = rand() & 10;
+            if(m_grid[y][x] == ' ') {
+                m_grid[y][x] = 'r';
+                break;
+            }
+        }
+    };
+
+    auto place_police = [&](){
+        while(true) {
+            int x = rand() & 10;
+            int y = rand() & 10;
+            if(m_grid[y][x] ==  ' ') {
+                m_grid[y][x] = 'p';
+                break;
+            }
+        }
+    };
+
+    auto print_grid = [&](){
+        for(int i = 0; i < 10; i++) {
+            cout << endl;
+            for(int j = 0; j < 10; j++) {
+                cout << m_grid[i][j];
+            }
+        }
+    };
+
     for(int i = 0; i < 47; i++) {
         place_jewel();
     }
 
+    for(int i = 0; i < 4; i++) {
+        place_robber();
+    }
+
+    for(int i = 0; i < 2; i++) {
+        place_police();
+    }
+
+    print_grid();
     set_jewel_count(47);
 }
 
