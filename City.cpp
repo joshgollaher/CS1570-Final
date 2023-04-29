@@ -45,15 +45,6 @@ City::City() {
         }
     };
 
-    auto print_grid = [&](){
-        for(int i = 0; i < 10; i++) {
-            cout << endl;
-            for(int j = 0; j < 10; j++) {
-                cout << m_grid[j][i];
-            }
-        }
-    };
-
     for(int i = 0; i < 47; i++) {
         place_jewel();
     }
@@ -62,12 +53,17 @@ City::City() {
         place_robber();
     }
 
-    for(int i = 0; i < 2; i++) {
-        place_police();
-    }
-
-    print_grid();
+    place_police();
     set_jewel_count(47);
+}
+
+void City::print_grid() const {
+    for(int i = 0; i < 10; i++) {
+        cout << endl;
+        for(int j = 0; j < 10; j++) {
+            cout << m_grid[j][i];
+        }
+    }
 }
 
 char City::get_grid_location(int x, int y) {
@@ -80,7 +76,7 @@ char City::get_grid_location(int x, int y) {
 
 void City::set_grid_location(int x, int y, char value) {
     if(x < 0 || x > 9 || y < 0 || y > 9) {
-        cout << "City::get_grid_location called with out of bound parameters" << endl;
+        cout << "City::set_grid_location called with out of bound parameters" << endl;
         return;
     }
 

@@ -26,6 +26,8 @@ public:
     char get_grid_location(int x, int y);
     void set_grid_location(int x, int y, char value);
 
+    void print_grid() const;
+
     bool is_jewel_at(pair<int, int> coordinates) const;
 
 };
