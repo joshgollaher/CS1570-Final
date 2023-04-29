@@ -32,9 +32,12 @@ private:
         Greedy
     };
     RobberType m_type;
+
 public:
 
-    explicit Robber(pair<int, int> coordinates) : m_robber_coordinates(std::move(coordinates)), m_robber_id(m_robber_id_count++), m_active(true) {}
+    static Robber<T> robbers[4];
+
+    explicit Robber(pair<int, int> coordinates = make_pair(0,0)) : m_robber_coordinates(std::move(coordinates)), m_robber_id(m_robber_id_count++), m_active(true) {}
 
     void pick_up_loot() {
 

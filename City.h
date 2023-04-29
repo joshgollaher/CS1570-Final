@@ -17,8 +17,6 @@ private:
     char m_grid[10][10];
     int m_jewel_count;
 
-
-
 public:
     City();
 
