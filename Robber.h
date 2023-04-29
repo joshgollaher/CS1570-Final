@@ -118,6 +118,10 @@ public:
             city.set_grid_location(m_robber_coordinates.first, m_robber_coordinates.second, 'r');
         }
 
+        if(city.get_grid_location(m_robber_coordinates.first, m_robber_coordinates.second) == 'r') {
+            city.set_grid_location(m_robber_coordinates.first, m_robber_coordinates.second, ' ');
+        }
+
         m_robber_coordinates.first += delta_x;
         m_robber_coordinates.second += delta_y;
         char c = city.get_grid_location(m_robber_coordinates.first, m_robber_coordinates.second);
