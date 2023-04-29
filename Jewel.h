@@ -1,6 +1,8 @@
-//
-// Created by Joshua Gollaher on 4/24/2023.
-//
+// Programmer: Joshua Gollaher and Benjamin Biehl
+// Date: 4/28/2023
+// File: main.cpp
+// Assignment: Final Project
+// Purpose: Header file for Jewel class
 
 #ifndef CS1570_FINAL_JEWEL_H
 #define CS1570_FINAL_JEWEL_H
@@ -11,17 +13,15 @@ using namespace std;
 class Jewel {
 private:
 
-    int m_worth;
     pair<int, int> m_coordinates;
-    pair<int, int> m_original_coordinates;
 
 public:
 
-    Jewel(pair<int, int> coordinates = make_pair(0, 0), int worth = 0) : m_coordinates(coordinates), m_original_coordinates(coordinates), m_worth(worth) {}
+    Jewel(pair<int, int> coordinates = make_pair(0, 0), int worth = 0) : m_coordinates(coordinates) {}
 
-    [[nodiscard]] int worth() const { return m_worth; }
-    void set_worth(int worth) { m_worth = worth; }
-
+    // Desc: returns m_coordinates
+    // Pre: takes in a pair of ints
+    // Post: m_coordinates is returned
     pair<int, int>& coordinates() { return m_coordinates; }
 
 };

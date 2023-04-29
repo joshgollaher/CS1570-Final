@@ -1,6 +1,8 @@
-//
-// Created by Joshua Gollaher on 4/24/2023.
-//
+// Programmer: Joshua Gollaher and Benjamin Biehl
+// Date: 4/28/2023
+// File: main.cpp
+// Assignment: Final Project
+// Purpose: Header file for Robber class
 
 #ifndef CS1570_FINAL_ROBBER_H
 #define CS1570_FINAL_ROBBER_H
@@ -37,30 +39,46 @@ private:
 
 public:
 
-    static Robber<T> robbers[4];
-
     explicit Robber(pair<int, int> coordinates = make_pair(0,0)) : m_robber_coordinates(std::move(coordinates)), m_robber_id(m_robber_id_count++), m_active(true), m_loot_count(0), m_jewels_collected(0) {}
 
+    // Desc: Sets m_active to active
+    // Pre: active must be a bool
+    // Post: m_active is set to the value of active
     void set_active(bool active) {
         m_active = active;
     }
 
+    // Desc: returns m_active
+    // Pre: none
+    // Post: m_active is returned
     bool is_active() const {
         return m_active;
     }
 
+    // Desc: returns m_robber_id
+    // Pre: none
+    // Post: m_robber_id is returned
     [[nodiscard]] int id() const {
         return m_robber_id;
     }
 
+    // Desc: returns m_total_loot_count
+    // Pre: none
+    // Post: m_total_loot_count is returned
     static int total_loot() {
         return m_total_loot_count;
     }
 
+    // Desc: returns m_robber_coordinates
+    // Pre: none
+    // Post: m_robber_coordinates is returned
     [[nodiscard]] pair<int, int> get_coordinates() const {
         return m_robber_coordinates;
     }
 
+    // Desc: Picks up the loot at the robber's coordinates
+    // Pre: none
+    // Post: The loot is added to the robber's bag and the loot value is returned
     int pick_up_loot() {
 
         int x = m_robber_coordinates.first;
@@ -80,18 +98,30 @@ public:
         return loot_value;
     }
 
+    // Desc: returns m_jewels_collected
+    // Pre: none
+    // Post: m_jewels_collected is returned
     [[nodiscard]] int num_jewels_collected() const {
         return m_jewels_collected;
     }
 
+    // Desc: returns m_loot_count
+    // Pre: none
+    // Post: m_loot_count is returned
     [[nodiscard]] int loot_count() const {
         return m_loot_count;
     }
 
+    // Desc: checks if robber is greedy
+    // Pre: none
+    // Post: returns true if robber is type Greedy
     bool is_greedy() const {
         return m_type == RobberType::Greedy;
     }
 
+    // Desc: checks if position is valid
+    // Pre: takes in a pair of ints
+    // Post: returns true if valid
     bool is_valid_position(pair<int, int> position){
         const int x = position.first;
         const int y = position.second;
@@ -99,6 +129,9 @@ public:
         return x >= 0 && x <= 9 && y >= 0 && y <= 9;
     }
 
+    // Desc: Handles movement and interactions based on where robber moves to
+    // Pre: Takes in city class and int is used for the ability to move many times in one turn
+    // Post: Returns true if the robber needs to be arrested
     bool move(City& city, int n_iterations=0) {
         if(n_iterations == 3) return false;
         if(!m_active) return false;

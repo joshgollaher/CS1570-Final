@@ -1,3 +1,9 @@
+// Programmer: Joshua Gollaher and Benjamin Biehl
+// Date: 4/28/2023
+// File: main.cpp
+// Assignment: Final Project
+// Purpose: Functions file for City class
+
 #include "City.h"
 #include <iostream>
 using namespace std;
@@ -81,8 +87,4 @@ void City::set_grid_location(int x, int y, char value) {
     }
 
     m_grid[y][x] = value;
-}
-
-bool City::is_jewel_at(pair<int, int> coordinates) const {
-    return coordinates.first >= 0 && coordinates.first < 10 && coordinates.second >= 0 && coordinates.second < 10 && m_grid[coordinates.second][coordinates.first] == 'J';
 }
